@@ -1,0 +1,28 @@
+﻿@page "/Counter2"
+
+@inject ProtectedLocalStorage localStorage
+@inject ProtectedSessionStorage sessionStorage
+
+<h3>Counter2</h3>
+
+<p>
+    Current Count: @currentCount
+</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click Me</button>
+
+@code{
+    private int currentCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await localStorage.GetAsync<int>("Counter2.currentCount");
+        currentCount = result.Success ? result.Value : 0;
+    }
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        await localStorage.SetAsync("Counter2.currentCount", currentCount);
+    }
+}

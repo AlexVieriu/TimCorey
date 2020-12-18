@@ -1,0 +1,54 @@
+﻿@page "/counter/{StartCount:int?}"
+@page "/counter/test/{*CustomRoute}"
+
+
+<h2>Custom Route</h2>
+<p>
+    @CustomRoute
+</p>
+
+<br />  
+<h1>Counter</h1>
+<br />
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<br />
+<input @ref="textInput1" />
+<br />
+<input @ref="textInput2" />
+
+@code {
+    [Parameter]
+    public int? StartCount { get; set; }
+
+    [Parameter]
+    public string CustomRoute { get; set; }
+
+    private int currentCount = 0;
+    private ElementReference textInput1;
+    private ElementReference textInput2;
+
+
+    protected override void OnParametersSet()
+    {
+        if (StartCount is not null)
+        {
+            currentCount = (int)StartCount;
+        }
+    }
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        @if (currentCount % 2 == 0)
+        {
+            await textInput1.FocusAsync();
+        }
+        else
+        {
+            await textInput2.FocusAsync();
+        }
+    }
+}

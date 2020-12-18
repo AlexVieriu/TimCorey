@@ -1,0 +1,34 @@
+﻿1. Radio Buttons
+2. Radio Buttons with Enum
+3. FileStream
+4. ElementReference
+5. Optional Parameters, Catch Parameters
+6. Custom Route
+@page "/counter/test/{*CustomRoute}"
+*	-> everything after the star gets capture
+
+Why learn?
+-> if you want to pass/handle multiple routes on one page 
+
+@page "/counter/{StartCount:int?}"
+@page "/counter/{*CustomRoute}"
+
+-> CustomRoute will overwrite the other {StartCount:int?} route
+
+7. Increpted browser storage
+-> session storage only last until you close your browser, once you close your browser window, that session goes away
+-> localStorage will remain
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage 
+
+8.  Display 5000 of records on the page
+
+<Virtualize Items="forecasts" Context="forecast">
+    <tr> 
+        <td>@forecast.Date.ToShortDateString()</td>
+        <td>@forecast.TemperatureC</td>
+        <td>@forecast.TemperatureF</td>
+        <td>@forecast.Summary</td>
+    </tr>
+</Virtualize>
+
+9. Css isolation
